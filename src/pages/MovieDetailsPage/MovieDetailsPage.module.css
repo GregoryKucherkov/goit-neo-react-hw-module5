@@ -1,0 +1,16 @@
+.detailsDiv {
+  display: flex;
+  max-width: 1280px;
+}
+
+.creditsDiv {
+  display: flex;
+  flex-direction: column;
+  padding-left: 30px;
+}
+
+.backLink {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}

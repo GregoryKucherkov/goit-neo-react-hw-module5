@@ -1,0 +1,11 @@
+.revUl {
+  display: flex;
+  flex-direction: column;
+  max-width: 1280px;
+}
+
+.revLi {
+  border: 1px solid black;
+  padding: 10px;
+  margin-bottom: 15px;
+}

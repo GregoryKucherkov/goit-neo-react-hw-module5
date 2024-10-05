@@ -1,0 +1,13 @@
+.notFound {
+  text-align: center;
+}
+
+.link {
+  font-size: 20px;
+  text-decoration: underline;
+}
+
+.linkSpan {
+  font-size: 22px;
+  color: green;
+}
