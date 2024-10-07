@@ -7,42 +7,33 @@ import { useSearchParams } from "react-router-dom";
 import ErrorMessage from "../../components/ErrorMsg/ErrorMsg";
 
 function MoviesPage() {
-  const [search, setSearch] = useState([]); //array of searched movies-> to make/draw a list
-  const [searchQuery, setSearchQuery] = useState("");
+  const [search, setSearch] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(false);
-  const [params, setParams] = useSearchParams(); //to read and update url
+  const [params, setParams] = useSearchParams();
 
-  const queryFromUrl = params.get("query") ?? "";
+  const queryFromUrl = params.get("query") ?? ""; // Get search query from the URL
+
   // Fetch movies when the page loads or when the query in the URL changes
-  // Get search query from the URL
-
   useEffect(() => {
     if (queryFromUrl) {
       handleSearch(queryFromUrl);
     } else {
-      // setSearchQuery("");
       setSearch([]);
     }
   }, [queryFromUrl]);
 
-  useEffect(() => {
-    if (!searchQuery) {
-      setSearch([]);
-      return;
-    }
+  const handleSearch = (searchQuery) => {
     const getMovies = async () => {
       try {
         setIsLoading(true);
         setError(false);
-
+        setParams({ query: searchQuery }); // Update the URL
         const data = await fetchMovie(`search/movie`, {
           query: searchQuery,
           include_adult: false,
           page: 1,
         });
-
-        setParams({ query: searchQuery }); // Update the URL
         setSearch(data.results);
       } catch (e) {
         console.log(e);
@@ -52,11 +43,6 @@ function MoviesPage() {
       }
     };
     getMovies();
-  }, [searchQuery, setParams]);
-
-  const handleSearch = (searchQuery) => {
-    setSearchQuery(searchQuery);
-    setSearch([]);
   };
 
   return (
